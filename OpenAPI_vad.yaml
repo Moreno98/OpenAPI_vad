@@ -5,6 +5,7 @@
       This API exposes endpoints for processing videos to detect anomalous content.
       Anomaly is defined as any content in the video that deviates from normal video patterns.
       The technology outputs an anomalous score, ranging from 0 (normal) to 1 (anomalous), for each frame in the video.
+      The API supports videos from this list of platforms: [supported platforms](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md).
   
     version: 1.0.0
   servers:
