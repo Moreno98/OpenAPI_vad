@@ -124,7 +124,7 @@
         tags:
           - vad
         summary: Get the results of a processed video
-        description: Get the results of a processed video, the processing has to be completed, thus the status has to be checked first. When processed successfully, the output has two fields: "result" and "confidence_score". The results field may have "anomalous" or "normal" as values, while the confidence score field is a value in the range [0,1] representing the confidence of the answer.
+        description: Get the results of a processed video, the processing has to be completed, thus the status has to be checked first. When processed successfully, the output has two fields "result" and "confidence_score". The results field may have "anomalous" or "normal" as values, while the confidence score field is a value in the range [0,1] representing the confidence of the answer.
         operationId: getResults
         parameters:
           - name: request_id
