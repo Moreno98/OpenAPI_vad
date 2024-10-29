@@ -149,6 +149,9 @@
                       enum: ["anomalous", "normal"]
                     confidence_score:
                       type: number
+                      format: float
+                      minimum: 0
+                      maximum: 1
                   example:
                     status: completed_successfully
                     result: anomalous
