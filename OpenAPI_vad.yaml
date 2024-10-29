@@ -124,7 +124,7 @@
         tags:
           - vad
         summary: Get the results of a processed video
-        description: Get the results of a processed video, the processing has to be completed, thus the status has to be checked first. The output score array contains the anomaly values for each frame of the video, each value ranges from 0 (normal) to 1 (anomalous). In the example the video has 4 frames.
+        description: Get the results of a processed video, the processing has to be completed, thus the status has to be checked first. When processed successfully, the output has two fields: "result" and "confidence_score". The results field may have "anomalous" or "normal" as values, while the confidence score field is a value in the range [0,1] representing the confidence of the answer.
         operationId: getResults
         parameters:
           - name: request_id
@@ -144,15 +144,17 @@
                     status:
                       type: string
                       enum: ["completed_successfully", "completed_failed", "processing"]
-                    score:
-                      type: array
-                      items:
-                        type: number
-                        format: float
-                        minimum: 0
-                        maximum: 1
+                    result:
+                      type: string
+                      enum: ["anomalous", "normal"]
+                    confidence_score:
+                      type: number
+                      format: float
+                      minimum: 0
+                      maximum: 1
                   example:
                     status: completed_successfully
-                    score: [0.9, 0.8, 0.2, 0.8]
+                    result: anomalous
+                    confidence_score: 0.76
           '400':
             description: Invalid id value
