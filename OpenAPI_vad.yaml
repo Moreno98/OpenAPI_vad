@@ -4,7 +4,7 @@
     description: |-
       This API exposes endpoints for processing videos to detect anomalous content.
       Anomaly is defined as any content in the video that deviates from normal video patterns.
-      The technology outputs a textual result ("anomalous" / "normal") and a confidence score.
+      The technology outputs an anomalous score, ranging from 0 (normal) to 1 (anomalous), for each frame in the video.
       The API supports videos from this list of platforms: [supported platforms](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md).
   
     version: 1.0.0
@@ -124,7 +124,7 @@
         tags:
           - vad
         summary: Get the results of a processed video
-        description: Get the results of a processed video, the processing has to be completed, thus the status has to be checked first. When processed successfully, the output has two fields: "result" and "confidence_score". The results field may have "anomalous" or "normal" as values, while the confidence score field is a value in the range [0,1] representing the confidence of the answer.
+        description: Get the results of a processed video, the processing has to be completed, thus the status has to be checked first. The output score array contains the anomaly values for each frame of the video, each value ranges from 0 (normal) to 1 (anomalous). In the example the video has 4 frames.
         operationId: getResults
         parameters:
           - name: request_id
@@ -144,17 +144,15 @@
                     status:
                       type: string
                       enum: ["completed_successfully", "completed_failed", "processing"]
-                    result:
-                      type: string
-                      enum: ["anomalous", "normal"]
-                    confidence_score:
-                      type: number
-                      format: float
-                      minimum: 0
-                      maximum: 1
+                    score:
+                      type: array
+                      items:
+                        type: number
+                        format: float
+                        minimum: 0
+                        maximum: 1
                   example:
                     status: completed_successfully
-                    result: anomalous
-                    confidence_score: 0.76
+                    score: [0.9, 0.8, 0.2, 0.8]
           '400':
             description: Invalid id value
