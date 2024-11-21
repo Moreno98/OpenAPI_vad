@@ -21,6 +21,14 @@
         summary: Upload a video
         description: Upload a video to the queue for processing
         operationId: uploadVideo
+        parameters:
+          - in: header
+            name: key
+            description: API Key for authentication
+            schema:
+              type: string
+              format: uuid
+            required: true
         requestBody:
           description: Upload a video to be processed
           content:
@@ -96,6 +104,13 @@
         description: Check the status of a submitted video
         operationId: status
         parameters:
+          - in: header
+            name: key
+            description: API Key for authentication
+            schema:
+              type: string
+              format: uuid
+            required: true
           - name: request_id
             in: path
             description: ID of video to check
@@ -133,6 +148,13 @@
             required: true
             schema:
               type: string
+          - in: header
+            name: key
+            description: API Key for authentication
+            schema:
+              type: string
+              format: uuid
+            required: true
         responses:
           '200':
             description: Successful operation. The 'status' field may have the following values "completed_successfully", "completed_failed", "processing". The 'score' field will be populated only if 'status' is "completed_successfully".
