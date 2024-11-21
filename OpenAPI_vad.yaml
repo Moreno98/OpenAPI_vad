@@ -6,6 +6,7 @@
       Anomaly is defined as any content in the video that deviates from normal video patterns.
       The technology outputs a textual result ("anomalous" / "normal") and a confidence score.
       The API supports videos from this list of platforms: [supported platforms](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md).
+      An API Key is required for accessing each endpoint of the technology, which must be provided under the header as 'key'.
   
     version: 1.0.0
   servers:
