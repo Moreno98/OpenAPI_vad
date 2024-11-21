@@ -4,9 +4,9 @@
     description: |-
       This API exposes endpoints for processing videos to detect anomalous content.
       Anomaly is defined as any content in the video that deviates from normal video patterns.
-      The technology outputs a textual result ("anomalous" / "normal") and a confidence score.
+      The technology outputs a textual result ("anomalous" / "normal") and a confidence score (in range [0, 100], where 0 is not confident and 100 is confident).
       The API supports videos from this list of platforms: [supported platforms](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md).
-      An API Key is required for accessing each endpoint of the technology, which must be provided under 'key' in the header of the request.
+      An API Key is required for accessing each endpoint of the technology, which must be provided under 'key' in the request's header.
   
     version: 1.0.0
   servers:
