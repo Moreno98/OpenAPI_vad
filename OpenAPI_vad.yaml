@@ -6,7 +6,7 @@
       Anomaly is defined as any content in the video that deviates from normal video patterns.
       The technology outputs a textual result ("anomalous" / "normal") and a confidence score.
       The API supports videos from this list of platforms: [supported platforms](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md).
-      An API Key is required for accessing each endpoint of the technology, which must be provided under the header as 'key'.
+      An API Key is required for accessing each endpoint of the technology, which must be provided under 'key' in the header of the request.
   
     version: 1.0.0
   servers:
@@ -143,12 +143,6 @@
         description: Get the results of a processed video, the processing has to be completed, thus the status has to be checked first. When processed successfully, the output has two fields "result" and "confidence_score". The results field may have "anomalous" or "normal" as values, while the confidence score field is a value in the range [0,1] representing the confidence of the answer.
         operationId: getResults
         parameters:
-          - name: request_id
-            in: path
-            description: ID of video to check
-            required: true
-            schema:
-              type: string
           - in: header
             name: key
             description: API Key for authentication
@@ -156,6 +150,12 @@
               type: string
               format: uuid
             required: true
+          - name: request_id
+            in: path
+            description: ID of video to check
+            required: true
+            schema:
+              type: string
         responses:
           '200':
             description: Successful operation. The 'status' field may have the following values "completed_successfully", "completed_failed", "processing". The 'score' field will be populated only if 'status' is "completed_successfully".
