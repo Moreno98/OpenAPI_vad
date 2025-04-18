@@ -1,16 +1,16 @@
-  openapi: 3.0.0
+openapi: 3.0.0
   info:
     title: Video Anomaly Detection
     description: |-
       This API exposes endpoints for processing videos to detect anomalous content.
       Anomaly is defined as any content in the video that deviates from normal video patterns.
-      The technology outputs a textual result ("anomalous" / "normal") and a confidence score (in range [0, 100], where 0 is not confident and 100 is confident).
+      The technology outputs a textual result ("anomalous" / "normal") and a confidence score (in range [0, 1], where 0 is not confident and 1 is confident).
       The API supports videos from this list of platforms: [supported platforms](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md).
       An API Key is required for accessing each endpoint of the technology, which must be provided under 'key' in the request's header.
   
     version: 1.0.0
   servers:
-    - url: http://[SERVICE ADDRESS]/
+    - url: http://vad.disi.unitn.it/
   tags:
     - name: vad
       description: Video Anomaly Detection
@@ -214,3 +214,61 @@
                       description: Unauthorized message.
                 example:
                   message: "Unauthorized."
+    /vad/version:
+      get:
+        tags:
+          - vad
+        summary: Get the current version of the API
+        description: Get the current version of the API
+        operationId: getVersion
+        parameters:
+          - in: header
+            name: key
+            description: API Key for authentication
+            schema:
+              type: string
+              format: uuid
+            required: true
+        responses:
+          '200':
+            description: Successful operation. The 'version' field contains the current version of the API.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    version:
+                      type: string
+                  example:
+                    version: 1.0.0
+          '404':
+            description: Not found
+    /vad/service_atatus:
+      get:
+        tags:
+          - vad
+        summary: Get the current status of the API
+        description: Get the current status of the API
+        operationId: getStatus
+        parameters:
+          - in: header
+            name: key
+            description: API Key for authentication
+            schema:
+              type: string
+              format: uuid
+            required: true
+        responses:
+          '200':
+            description: Successful operation. The 'message' field contains the current status of the API.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                  example:
+                    message: Service is running
+          '404':
+            description: Not found
