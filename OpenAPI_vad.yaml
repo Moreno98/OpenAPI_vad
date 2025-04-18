@@ -242,8 +242,8 @@
                   example:
                     version: 1.0.0
           '404':
-            description: Not found
-    /vad/service_atatus:
+            description: Not found. The service may be down.
+    /vad/service_status:
       get:
         tags:
           - vad
@@ -270,5 +270,16 @@
                       type: string
                   example:
                     message: Service is running
+          '500':
+            description: The service is currently unavailable.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                  example:
+                    message: The service is currently unavailable.
           '404':
-            description: Not found
+            description: Not found. The service may be down.
