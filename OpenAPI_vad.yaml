@@ -241,8 +241,6 @@
                       type: string
                   example:
                     version: 1.0.0
-          '404':
-            description: Not found. The service may be down.
     /vad/service_status:
       get:
         tags:
@@ -281,5 +279,3 @@
                       type: string
                   example:
                     message: The service is currently unavailable.
-          '404':
-            description: Not found. The service may be down.
