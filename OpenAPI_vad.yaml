@@ -109,6 +109,103 @@
                       description: A message stating the outcome of the request
                 example:
                   message: "The video is already in the queue."
+    /vad/telegram/submit:
+      post:
+        tags:
+          - vad
+        summary: Upload a video
+        description: Upload a video to the queue for processing
+        operationId: uploadVideo
+        parameters:
+          - in: header
+            name: key
+            description: API Key for authentication
+            schema:
+              type: string
+              format: uuid
+            required: true
+        requestBody:
+          description: Upload a telegram video to be processed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  channel_name:
+                    type: string
+                    description: The name of the telegram channel
+                  message_id:
+                    type: string
+                    description: The ID of the telegram message within the channel
+              example:
+                channel_name: telegram
+                message_id: 380
+          required: true
+        responses:
+          '200':
+            description: Request accepted
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      description: A message stating the outcome of the request
+                    request_id:
+                      type: string
+                      description: The id associated to the uploaded video, this can be used to check the processing status or the final result
+                example:
+                  message: "The video has been correctly submitted and queued."
+                  request_id: 6e6bc4e49dd477ebc98ef4046c067b5f
+          '400':
+            description: Bad request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      description: A message stating the outcome of the request
+                example:
+                  message: "The request has been wrongly formatted."
+          '401':
+            description: Unauthorized
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      description: Unauthorized message.
+                example:
+                  message: "Unauthorized."
+          '404':
+            description: Broken url
+            content: 
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      description: A message stating the outcome of the request
+                example:
+                  message: "The input URL is broken."
+          '409':
+            description: Conflict 
+            content: 
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      description: A message stating the outcome of the request
+                example:
+                  message: "The video is already in the queue."
     /vad/status/{request_id}:
       get:
         tags:
