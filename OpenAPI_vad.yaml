@@ -115,7 +115,7 @@
           - vad
         summary: Upload a video
         description: Upload a video to the queue for processing
-        operationId: uploadVideo
+        operationId: uploadTelegramVideo
         parameters:
           - in: header
             name: key
