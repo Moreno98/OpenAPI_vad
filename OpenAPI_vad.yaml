@@ -243,7 +243,21 @@
                 example:
                   status: processing
           '400':
-            description: Invalid id value
+            description: Failed processing. Please check the 'status' field for its possible values. This field may have the following values "max_length_exceeded", "video_processing_failed", "video_download_failed".
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      enum: [
+                        "max_length_exceeded", "video_processing_failed", "video_download_failed"
+                      ]
+                example:
+                  status: video_download_failed
+          '404':
+            description: Invalid id value, not found
           '401':
             description: Unauthorized
             content:
