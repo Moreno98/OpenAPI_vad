@@ -229,7 +229,7 @@
               type: string
         responses:
           '200':
-            description: Successful processing. Please check the 'status' field for its possible values. This field may have the following values: "processing", "waiting_to_be_processed", "completed".
+            description: Successful operation. Please check the 'status' field for its possible values. This field may have the following values "processing", "waiting_to_be_processed", "max_length_exceeded", "video_processing_failed", "video_download_failed", "completed".
             content:
               application/json:
                 schema:
@@ -238,7 +238,7 @@
                     status:
                       type: string
                       enum: [
-                        "processing", "waiting_to_be_processed", "completed"
+                        "processing", "waiting_to_be_processed", "max_length_exceeded", "video_processing_failed", "video_download_failed", "completed"
                       ]
                 example:
                   status: processing
