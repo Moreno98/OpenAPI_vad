@@ -229,7 +229,7 @@
               type: string
         responses:
           '200':
-            description: Successful operation. Please check the 'status' field for its possible values. This field may have the following values "processing", "waiting_to_be_processed", "max_length_exceeded", "video_processing_failed", "video_download_failed", "completed".
+            description: Successful processing. Please check the 'status' field for its possible values. This field may have the following values: "processing", "waiting_to_be_processed", "completed".
             content:
               application/json:
                 schema:
@@ -238,12 +238,26 @@
                     status:
                       type: string
                       enum: [
-                        "processing", "waiting_to_be_processed", "max_length_exceeded", "video_processing_failed", "video_download_failed", "completed"
+                        "processing", "waiting_to_be_processed", "completed"
                       ]
                 example:
                   status: processing
           '400':
-            description: Invalid id value
+            description: Failed processing. Please check the 'status' field for its possible values. In case of failures, this field may have the following values: "max_length_exceeded", "video_processing_failed", "video_download_failed".
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      enum: [
+                        "max_length_exceeded", "video_processing_failed", "video_download_failed"
+                      ]
+                example:
+                  status: video_download_failed
+          '404':
+            description: Invalid id value, not found
           '401':
             description: Unauthorized
             content:
